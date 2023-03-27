@@ -2,7 +2,7 @@ defmodule DynDbTest do
   use ExUnit.Case
   doctest DynDb
 
-  test "greets the world" do
-    assert DynDb.hello() == :world
+  test "placeholder" do
+    assert 1 == 1
   end
 end

@@ -13,7 +13,7 @@ DynDb intends to make it easy to manage dynamic SqLite datastores.
 
 ## Features
 
-Use DynDb to store data in one or more segregated / isolated databases.
+Use DynDb to manage one or more segregated / isolated databases.
 
 This may be useful in situations with:
 - privacy concerns - medical or financial data 
@@ -69,19 +69,25 @@ end
 # Interact with the DynDb
 defmodule Main do 
   def main do 
-    # Start a DynDb with a database file (will be auto-created)
+    # The database file will be auto-created
     {:ok, db1} = DynDb.start_link(database: "./data1.db")
 
     # Migrate 
     DynDb.migrate(db1, Migration0) 
 
     # Query  
-    DynDb.insert!(db1, %Chat{message: "HELLO!"})
+    DynDb.insert!(db1, %Chat{message: "HELLO at #{Time.utc_now()} UTC"})
     DynDb.all(db1, Chat) |> IO.inspect()
   end 
 end 
 
 Main.main()
+```
+
+Run the script, then query the database from the command line!
+
+```bash
+> sqlite3 -batch data1.db "select * from chats;"
 ```
 
 ## References 
