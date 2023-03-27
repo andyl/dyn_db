@@ -1,2 +1,108 @@
-# dyn_db
-Dynamic Sqlite databases for Elixir
+# DynDb
+
+Dynamic Sqlite databases for Elixir.  
+
+## Overview
+
+It's easy manage dynamic K/V datastores using [:dets][1] or [CubDB][2] .
+
+[1]: https://www.erlang.org/doc/man/dets.html 
+[2]: https://github.com/lucaong/cubdb
+
+DynDb intends to make it easy to manage a dynamic SqLite datastore.  
+
+## Features
+
+Use DynDb to store data in one or more segregated / isolated databases.
+
+This may be useful in situations with:
+- privacy concerns - medical or financial data 
+- regulatory issues - GDPR etc.
+- portability requirements - allowing users to download data and run locally 
+
+Key features:
+- Dynamic creation and use of Sqlite data stores 
+- Encrypted data stores 
+- Ecto Migrations and Query operations
+
+## Installation
+
+```elixir
+def deps do
+  [
+    {:dyn_db, github: "andyl/dyn_db"}
+  ]
+end
+```
+
+## Usage
+
+```elixir 
+#!/usr/bin/env elixir 
+
+Mix.install([
+  {:dyn_db, github: "andyl/dyn_db"}
+])
+
+# Write a Migration 
+defmodule Migration0 do
+  use Ecto.Migration
+
+  def change do
+    create table("chats") do
+      add(:message, :string)
+      timestamps(type: :utc_datetime_usec)
+    end
+  end
+end
+
+# Write a Schema 
+defmodule Chat do
+  use Ecto.Schema
+
+  schema "chats" do
+    field(:message, :string)
+    timestamps(type: :utc_datetime_usec)
+  end
+end
+
+# Interact with the DynDb
+defmodule Main do 
+  def main do 
+    # Start a `DynDb` with a database file (will be auto-created)
+    {:ok, db1} = DynDb.start_link(database: "./data1.db")
+
+    # Migrate 
+    DynDb.migrate(db1, Migration0) 
+
+    # Query  
+    DynDb.insert!(db1, %Chat{message: "HELLO!"})
+    DynDb.all(db1, Chat) |> IO.inspect()
+  end 
+end 
+
+Main.main()
+```
+
+## References 
+
+DynDb is super new & we're learning where and how it will work best.
+
+Here are some references used to learn about dynamic repos.
+
+| Source       | Title                                                |
+|--------------|------------------------------------------------------|
+| Underjord    | [ECTO & MULTI-TENANCY - DYNAMIC REPOS - PART 1][uj1] |
+| Underjord    | [ECTO & MULTI-TENANCY - DYNAMIC REPOS - PART 2][uj2] |
+| Elixir Forum | [Separate Sqlite Database per Customer?][ef1]        |
+| HexDocs      | [Ecto Migrator][hd1]                                 |
+| HexDocs      | [Ecto Dynamic Repos][hd2]                            |
+| GitHub       | [CubDB][gh1]                                         |
+
+[uj1]: https://underjord.io/ecto-multi-tenancy-dynamic-repos-part-1-getting-started.html
+[uj2]: https://underjord.io/ecto-multi-tenancy-dynamic-repos-part-2.html
+[ef1]: https://elixirforum.com/t/separate-sqlite-database-per-customer/54821
+[hd1]: https://hexdocs.pm/ecto_sql/Ecto.Migrator.html
+[hd2]: https://hexdocs.pm/ecto/replicas-and-dynamic-repositories.html#dynamic-repositories
+[gh1]: https://github.com/lucaong/cubdb
+
