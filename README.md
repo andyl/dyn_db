@@ -4,14 +4,14 @@ Dynamic Sqlite databases for Elixir.
 
 ## Overview
 
-It's easy manage dynamic K/V datastores using [:dets][1] or [CubDB][2] .
+It's easy manage dynamic key/value datastores using [:dets][1] or [CubDB][2] .
 
 [1]: https://www.erlang.org/doc/man/dets.html 
 [2]: https://github.com/lucaong/cubdb
 
 DynDb intends to make it easy to manage dynamic SqLite datastores.  
 
-## Features
+## About
 
 Use DynDb to manage one or more segregated / isolated databases.
 
@@ -104,6 +104,7 @@ Here are some references to learn about dynamic repos and comparable software.
 | Underjord    | [ECTO & MULTI-TENANCY - DYNAMIC REPOS - PART 1][uj1] |
 | Underjord    | [ECTO & MULTI-TENANCY - DYNAMIC REPOS - PART 2][uj2] |
 | GitHub       | [CubDB][gh1]                                         |
+| Twitter      | [Alex Koutmos Experiment][tw1]                       |
 
 [uj1]: https://underjord.io/ecto-multi-tenancy-dynamic-repos-part-1-getting-started.html
 [uj2]: https://underjord.io/ecto-multi-tenancy-dynamic-repos-part-2.html
@@ -111,4 +112,5 @@ Here are some references to learn about dynamic repos and comparable software.
 [hd1]: https://hexdocs.pm/ecto_sql/Ecto.Migrator.html
 [hd2]: https://hexdocs.pm/ecto/replicas-and-dynamic-repositories.html#dynamic-repositories
 [gh1]: https://github.com/lucaong/cubdb
+[tw1]: https://twitter.com/akoutmos/status/1495830005267542027
 
