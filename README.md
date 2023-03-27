@@ -86,9 +86,9 @@ Main.main()
 
 ## References 
 
-DynDb is super new & we're learning where and how it will work best.
+DynDb is experimental.  Basic functions and best practices are not yet known.
 
-Here are some references learn about dynamic repos.
+Here are some references to learn about dynamic repos and comparable software.
 
 | Source       | Title                                                |
 |--------------|------------------------------------------------------|
