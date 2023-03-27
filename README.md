@@ -4,7 +4,7 @@ Dynamic Sqlite databases for Elixir.
 
 ## Overview
 
-It's easy manage dynamic key/value datastores using [:dets][1] or [CubDB][2] .
+It's easy to manage dynamic key/value datastores using [:dets][1] or [CubDB][2] .
 
 [1]: https://www.erlang.org/doc/man/dets.html 
 [2]: https://github.com/lucaong/cubdb
@@ -13,9 +13,8 @@ DynDb intends to make it easy to manage dynamic SqLite datastores.
 
 ## About
 
-Use DynDb to manage one or more segregated / isolated databases.
-
-This may be useful in situations with:
+Use DynDb to manage one or more segregated / isolated databases. This may be
+useful in situations with:
 - privacy concerns - medical or financial data 
 - regulatory issues - GDPR etc.
 - portability requirements - allowing users to download data and run locally 
