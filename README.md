@@ -9,7 +9,7 @@ It's easy manage dynamic K/V datastores using [:dets][1] or [CubDB][2] .
 [1]: https://www.erlang.org/doc/man/dets.html 
 [2]: https://github.com/lucaong/cubdb
 
-DynDb intends to make it easy to manage a dynamic SqLite datastore.  
+DynDb intends to make it easy to manage dynamic SqLite datastores.  
 
 ## Features
 
@@ -69,7 +69,7 @@ end
 # Interact with the DynDb
 defmodule Main do 
   def main do 
-    # Start a `DynDb` with a database file (will be auto-created)
+    # Start a DynDb with a database file (will be auto-created)
     {:ok, db1} = DynDb.start_link(database: "./data1.db")
 
     # Migrate 
@@ -88,15 +88,15 @@ Main.main()
 
 DynDb is super new & we're learning where and how it will work best.
 
-Here are some references used to learn about dynamic repos.
+Here are some references learn about dynamic repos.
 
 | Source       | Title                                                |
 |--------------|------------------------------------------------------|
-| Underjord    | [ECTO & MULTI-TENANCY - DYNAMIC REPOS - PART 1][uj1] |
-| Underjord    | [ECTO & MULTI-TENANCY - DYNAMIC REPOS - PART 2][uj2] |
 | Elixir Forum | [Separate Sqlite Database per Customer?][ef1]        |
 | HexDocs      | [Ecto Migrator][hd1]                                 |
 | HexDocs      | [Ecto Dynamic Repos][hd2]                            |
+| Underjord    | [ECTO & MULTI-TENANCY - DYNAMIC REPOS - PART 1][uj1] |
+| Underjord    | [ECTO & MULTI-TENANCY - DYNAMIC REPOS - PART 2][uj2] |
 | GitHub       | [CubDB][gh1]                                         |
 
 [uj1]: https://underjord.io/ecto-multi-tenancy-dynamic-repos-part-1-getting-started.html
