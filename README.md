@@ -1,4 +1,4 @@
-# DynDb
+# DynDB
 
 Dynamic Sqlite databases for Elixir.  
 
@@ -9,11 +9,11 @@ It's easy to manage dynamic key/value datastores using [:dets][1] or [CubDB][2] 
 [1]: https://www.erlang.org/doc/man/dets.html 
 [2]: https://github.com/lucaong/cubdb
 
-DynDb intends to make it easy to manage dynamic SqLite datastores.  
+DynDB intends to make it easy to manage dynamic SqLite datastores.  
 
 ## About
 
-Use DynDb to manage one or more segregated / isolated databases. This may be
+Use DynDB to manage one or more segregated / isolated databases. This may be
 useful in situations with:
 - privacy concerns - medical or financial data 
 - regulatory issues - GDPR etc.
@@ -21,8 +21,9 @@ useful in situations with:
 
 Key features:
 - Dynamic creation and use of Sqlite data stores 
-- Encrypted data stores 
 - Ecto Migrations and Query operations
+- Encrypted data stores (future) 
+- Offline data sync (future) 
 
 ## Installation
 
@@ -65,18 +66,18 @@ defmodule Chat do
   end
 end
 
-# Interact with the DynDb
+# Interact with the DynDB
 defmodule Main do 
   def main do 
     # The database file will be auto-created
-    {:ok, db1} = DynDb.start_link(database: "./data1.db")
+    {:ok, db1} = DynDB.start_link(database: "./data1.db")
 
     # Migrate 
-    DynDb.migrate(db1, Migration0) 
+    DynDB.migrate(db1, Migration0) 
 
     # Query  
-    DynDb.insert!(db1, %Chat{message: "HELLO at #{Time.utc_now()} UTC"})
-    DynDb.all(db1, Chat) |> IO.inspect()
+    DynDB.insert!(db1, %Chat{message: "HELLO at #{Time.utc_now()} UTC"})
+    DynDB.all(db1, Chat) |> IO.inspect()
   end 
 end 
 
@@ -91,7 +92,7 @@ Run the script, then query the database from the command line!
 
 ## References 
 
-DynDb is experimental.  Basic functions and best practices are not yet known.
+DynDB is experimental.  Basic functions and best practices are not yet known.
 
 Here are some references to learn about dynamic repos and comparable software.
 
@@ -103,7 +104,9 @@ Here are some references to learn about dynamic repos and comparable software.
 | Underjord    | [ECTO & MULTI-TENANCY - DYNAMIC REPOS - PART 1][uj1] |
 | Underjord    | [ECTO & MULTI-TENANCY - DYNAMIC REPOS - PART 2][uj2] |
 | GitHub       | [CubDB][gh1]                                         |
+| GitHub       | [alexkoutmos/litestream][gh2]                        |
 | Twitter      | [Alex Koutmos Experiment][tw1]                       |
+
 
 [uj1]: https://underjord.io/ecto-multi-tenancy-dynamic-repos-part-1-getting-started.html
 [uj2]: https://underjord.io/ecto-multi-tenancy-dynamic-repos-part-2.html
@@ -111,5 +114,15 @@ Here are some references to learn about dynamic repos and comparable software.
 [hd1]: https://hexdocs.pm/ecto_sql/Ecto.Migrator.html
 [hd2]: https://hexdocs.pm/ecto/replicas-and-dynamic-repositories.html#dynamic-repositories
 [gh1]: https://github.com/lucaong/cubdb
+[gh2]: https://github.com/akoutmos/litestream
 [tw1]: https://twitter.com/akoutmos/status/1495830005267542027
 
+## Roadmap 
+
+- [x] Basic operation 
+- [ ] Module Docs 
+- [ ] Unit tests 
+- [ ] Litestream sync
+- [ ] Encrypted databases 
+- [ ] Capacity tests to understand scalability limits
+- [ ] Usage guides (Migrations, Sync, Encryption, Scalability, ...) 
