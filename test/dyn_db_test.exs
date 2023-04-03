@@ -1,6 +1,6 @@
-defmodule DynDbTest do
+defmodule DynDBTest do
   use ExUnit.Case
-  doctest DynDb
+  doctest DynDB
 
   test "placeholder" do
     assert 1 == 1

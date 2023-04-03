@@ -6,35 +6,35 @@ Mix.install([
   {:ecto_sqlite3, "~> 0.9"},
 ])
 
-defmodule DynDb.Repo do 
+defmodule DynDB.Repo do 
   use Ecto.Repo,
     adapter: Ecto.Adapters.SQLite3, 
     otp_app: :dyn_db
 end
 
-defmodule DynDb do
+defmodule DynDB do
 
   def start_link(args) do 
-    DynDb.Repo.start_link(args) 
+    DynDB.Repo.start_link(args) 
   end
 
   def all(repo, sch) do 
-    DynDb.Repo.put_dynamic_repo(repo) 
-    DynDb.Repo.all(sch)
+    DynDB.Repo.put_dynamic_repo(repo) 
+    DynDB.Repo.all(sch)
   end
 
   def insert!(repo, data) do 
-    DynDb.Repo.put_dynamic_repo(repo) 
-    DynDb.Repo.insert!(data)
+    DynDB.Repo.put_dynamic_repo(repo) 
+    DynDB.Repo.insert!(data)
   end
 
   def migrate(repo, klas) do 
-    DynDb.Repo.put_dynamic_repo(repo) 
-    Ecto.Migrator.run(DynDb.Repo, [{0, klas}], :up, all: true, dynamic_repo: repo)
+    DynDB.Repo.put_dynamic_repo(repo) 
+    Ecto.Migrator.run(DynDB.Repo, [{0, klas}], :up, all: true, dynamic_repo: repo)
   end
 
   def exec(repo, callback) do 
-    DynDb.Repo.put_dynamic_repo(repo) 
+    DynDB.Repo.put_dynamic_repo(repo) 
     callback.() 
   end
 end
@@ -68,17 +68,17 @@ defmodule Main do
     System.cmd("rm", ["-f", "test1.db"])
     System.cmd("rm", ["-f", "test2.db"])
 
-    {:ok, repo1} = DynDb.start_link(name: nil, database: "test1.db")
-    {:ok, repo2} = DynDb.start_link(name: nil, database: "test2.db")
+    {:ok, repo1} = DynDB.start_link(name: nil, database: "test1.db")
+    {:ok, repo2} = DynDB.start_link(name: nil, database: "test2.db")
 
-    DynDb.migrate(repo1, Migration0) 
-    DynDb.migrate(repo2, Migration0) 
+    DynDB.migrate(repo1, Migration0) 
+    DynDB.migrate(repo2, Migration0) 
 
-    DynDb.insert!(repo1, %Roster{name: "Alex", city: "NY", age: 22})
-    DynDb.insert!(repo2, %Roster{name: "Serge", city: "LA", age: 44})
+    DynDB.insert!(repo1, %Roster{name: "Alex", city: "NY", age: 22})
+    DynDB.insert!(repo2, %Roster{name: "Serge", city: "LA", age: 44})
 
-    DynDb.all(repo1, Roster) |> IO.inspect(label: "TEST1")
-    DynDb.all(repo2, Roster) |> IO.inspect(label: "TEST2")
+    DynDB.all(repo1, Roster) |> IO.inspect(label: "TEST1")
+    DynDB.all(repo2, Roster) |> IO.inspect(label: "TEST2")
   end
 end
 
