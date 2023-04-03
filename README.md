@@ -124,5 +124,6 @@ Here are some references to learn about dynamic repos and comparable software.
 - [ ] Unit tests 
 - [ ] Litestream sync
 - [ ] Encrypted databases 
+- [ ] Metrics
 - [ ] Capacity tests to understand scalability limits
 - [ ] Usage guides (Migrations, Sync, Encryption, Scalability, ...) 
