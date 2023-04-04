@@ -4,7 +4,9 @@ defmodule DynDB do
   """
 
   def start_link(args) do
-    DynDB.Repo.start_link(args)
+    args
+    |> Keyword.merge([name: nil])
+    |> DynDB.Repo.start_link()
   end
 
   # DynDB.Query
@@ -18,6 +20,7 @@ defmodule DynDB do
   defdelegate one(repo, queryable, opts \\ []), to: DynDB.Query
   defdelegate one!(repo, queryable, opts \\ []), to: DynDB.Query
   defdelegate update_all(repo, queryable, clauses, opts \\ []), to: DynDB.Query
+  defdelegate query(repo, sql_query), to: DynDB.Query
 
   # DynDB.Schema
   defdelegate delete(repo, struct_or_changeset, opts \\ []), to: DynDB.Schema

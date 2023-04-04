@@ -1,11 +1,16 @@
 #!/usr/bin/env bash 
 
-BASEDIR=~/zz/sqlcipher 
+# re-gen the exqlite nif using sqlcipher for encrypted databases 
+#
+# ubuntu 22.04 dependencies: 
+# sudo apt install build-essential erlang-dev 
 
-sudo rm -rf _build 
+sudo rm -rf _build/dev/lib/exqlite
+
+[ ! -e /tmp/sqlcipher ] && git clone --depth 1 https://github.com/sqlcipher/sqlcipher.git /tmp/sqlcipher
 
 export EXQLITE_USE_SYSTEM=1
-export EXQLITE_SYSTEM_CFLAGS=-I$BASEDIR
-export EXQLITE_SYSTEM_LDFLAGS=-lcrypto
+export EXQLITE_SYSTEM_CFLAGS="-I/tmp/sqlcipher"
+export EXQLITE_SYSTEM_LDFLAGS="-L/tmp/sqlcipher -lsqlcipher"
 
 mix compile

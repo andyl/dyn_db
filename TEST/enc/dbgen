@@ -1,0 +1,24 @@
+#!/usr/bin/env bash 
+
+if [ -z "$1" ] 
+then
+  testdb="xtest.db"
+else
+  testdb="$1"
+fi
+
+seed=$(( ( RANDOM % 1000 )  + 1 ))
+
+rm -f $testdb
+
+echo "Test DB is $testdb"
+echo "Make an unencrypted database (xtest)"
+echo "DB table is 'roster'"
+echo "Roster fields are 'id|name|city|age'"
+
+./sqlcipher -batch $testdb "create table roster (id INTEGER PRIMARY KEY, name TEXT, city TEXT, age INTEGER);" 
+./sqlcipher -batch $testdb "insert into roster (name,city,age) values ('joe$seed','fargo',22);"
+./sqlcipher -batch $testdb "insert into roster (name,city,age) values ('george$seed','chicago',32);"
+./sqlcipher -batch $testdb "insert into roster (name,city,age) values ('james$seed','duluth',52);"
+./sqlcipher -batch $testdb "insert into roster (name,city,age) values ('serge$seed','omaha',42);"
+./sqlcipher -batch $testdb "select * from roster;"

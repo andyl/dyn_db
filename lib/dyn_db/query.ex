@@ -50,4 +50,9 @@ defmodule DynDB.Query do
     DynDB.Repo.update_all(queryable, clauses, opts)
   end
 
+  def query(repo, query) do
+    DynDB.Repo.put_dynamic_repo(repo)
+    Ecto.Adapters.SQL.query(DynDB.Repo, query)
+  end
+
 end
