@@ -1,0 +1,12 @@
+#!/usr/bin/env bash 
+
+REPODIR=~/zz/sqlcipher 
+HOMEDIR=$(pwd) 
+
+cd $REPODIR 
+
+./configure --enable-tempstore=yes CFLAGS="-DSQLITE_HAS_CODEC" LDFLAGS="-lcrypto" 
+
+make 
+
+cp sqlcipher $HOMEDIR

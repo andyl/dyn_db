@@ -1,0 +1,11 @@
+#!/usr/bin/env bash 
+
+BASEDIR=~/zz/sqlcipher 
+
+sudo rm -rf _build 
+
+export EXQLITE_USE_SYSTEM=1
+export EXQLITE_SYSTEM_CFLAGS=-I$BASEDIR
+export EXQLITE_SYSTEM_LDFLAGS=-lcrypto
+
+mix compile
