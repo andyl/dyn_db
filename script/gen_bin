@@ -9,4 +9,5 @@ cd $REPODIR
 
 make 
 
-cp sqlcipher $HOMEDIR
+echo "Copying sqlcipher to $HOMEDIR/TEST/enc"
+cp sqlcipher $HOMEDIR/TEST/enc

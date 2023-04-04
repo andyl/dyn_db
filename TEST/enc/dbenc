@@ -1,0 +1,24 @@
+#!/usr/bin/env bash 
+
+
+if [ -z "$1" ] 
+then
+  testdb="ztest.db"
+else
+  testdb="$1"
+fi
+
+seed=$(( ( RANDOM % 1000 )  + 1 ))
+
+rm -f $testdb
+
+echo "Test DB is $testdb"
+echo "DB table is 'roster'"
+echo "Roster fields are 'id|name|city|age'"
+
+./sqlcipher -key SECRET -batch $testdb "create table roster (id INTEGER PRIMARY KEY, name TEXT, city TEXT, age INTEGER);" 
+./sqlcipher -key SECRET -batch $testdb "insert into roster (name,city,age) values ('joe$seed','fargo',22);"
+./sqlcipher -key SECRET -batch $testdb "insert into roster (name,city,age) values ('george$seed','chicago',32);"
+./sqlcipher -key SECRET -batch $testdb "insert into roster (name,city,age) values ('james$seed','duluth',52);"
+./sqlcipher -key SECRET -batch $testdb "insert into roster (name,city,age) values ('serge$seed','omaha',42);"
+./sqlcipher -key SECRET -batch $testdb "select * from roster;"

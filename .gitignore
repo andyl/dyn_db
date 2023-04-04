@@ -9,4 +9,4 @@ dyn_db-*.tar
 /tmp/
 *.db*
 mix.lock 
-sqlcipher
+TEST/enc/sqlcipher
